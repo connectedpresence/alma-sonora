@@ -1,0 +1,29 @@
+{
+  "events": [
+    {
+      "id": "cacao-sonido-2026-05-24",
+      "title": "Cacao & Sonido",
+      "subtitle": "Una mañana ceremonial",
+      "date": "2026-05-24",
+      "date_display": "Domingo 24 de Mayo, 2026",
+      "time": "10:00",
+      "time_display": "10:00 AM",
+      "duration_minutes": 120,
+      "location": "Espacio Alma Sonora",
+      "address": "Bird Road, Miami, FL",
+      "capacity": 12,
+      "price_cents": 6500,
+      "price_display": "$65",
+      "currency": "USD",
+      "description": "Una mañana para regular tu sistema nervioso y recordar cómo descansar. Cacao ceremonial, sonoterapia con cuencos de cuarzo y presencia compartida.",
+      "includes": [
+        "Cacao ceremonial",
+        "Sonoterapia con cuencos de cuarzo",
+        "Espacio de integración",
+        "Cupo limitado a 12 personas"
+      ],
+      "square_checkout_url": null,
+      "active": true
+    }
+  ]
+}

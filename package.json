@@ -1,0 +1,19 @@
+{
+  "name": "alma-sonora-bookings",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker + D1 booking backend for Alma Sonora",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dev": "wrangler deploy --env dev",
+    "db:query": "wrangler d1 execute alma-sonora-bookings --command",
+    "db:schema": "wrangler d1 execute alma-sonora-bookings --file=schema.sql",
+    "db:bookings": "wrangler d1 execute alma-sonora-bookings --command \"SELECT b.*, e.title FROM bookings b JOIN events e ON e.id = b.event_id ORDER BY b.created_at DESC\"",
+    "db:availability": "wrangler d1 execute alma-sonora-bookings --command \"SELECT e.id, e.title, e.date, e.capacity, COALESCE(SUM(CASE WHEN b.status IN ('confirmed','pending') THEN b.quantity ELSE 0 END),0) AS spots_taken FROM events e LEFT JOIN bookings b ON b.event_id = e.id GROUP BY e.id\"",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

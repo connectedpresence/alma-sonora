@@ -1,0 +1,30 @@
+name = "alma-sonora-bookings"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ── D1 Database binding ────────────────────────────────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "alma-sonora-bookings"
+database_id = "6c620667-e9d5-4f04-8461-52e4ff79b71e"
+
+# ── Secrets (set via: wrangler secret put <NAME>) ──────────────────
+# SQUARE_WEBHOOK_SIGNATURE_KEY  ← from Square Developer Dashboard
+# ADMIN_SECRET                  ← you choose; use a strong random string
+
+# ── Routes ────────────────────────────────────────────────────────
+# Uncomment and update once you have your Cloudflare zone for alma-sonora.com
+# routes = [
+#   { pattern = "api.alma-sonora.com/*", zone_name = "alma-sonora.com" }
+# ]
+
+# ── Dev environment ────────────────────────────────────────────────
+[env.dev]
+name = "alma-sonora-bookings-dev"
+vars = { ENVIRONMENT = "development" }
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "alma-sonora-bookings"
+database_id = "6c620667-e9d5-4f04-8461-52e4ff79b71e"
