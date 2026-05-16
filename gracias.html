@@ -1,454 +1,556 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tu espacio está reservado · Alma Sonora</title>
-  <meta name="robots" content="noindex" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu espacio está reservado · Alma Sonora</title>
+<meta name="robots" content="noindex">
 
-  <link rel="icon" type="image/png" href="favicon-32.png" />
-  <link rel="apple-touch-icon" href="apple-to...-icon.png" />
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-icon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Italiana&display=swap" rel="stylesheet">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --gold:       #C9A84C;
-      --gold-light: #E8D5A3;
-      --cream:      #F5EFE0;
-      --sage:       #3D5A47;
-      --dark:       #1a1a18;
-      --text:       #2C2C2A;
-    }
+  :root {
+    --green-light:  #5d7a68;
+    --green-mid:    #46604f;
+    --green-deep:   #36513f;
+    --green-darker: #213829;
+    --green-shadow: #0d1611;
 
-    html { scroll-behavior: smooth; }
+    --gold:         #c9a961;
+    --gold-bright:  #e0c074;
+    --gold-rich:    #d4b876;
+    --gold-deep:    #a08851;
+    --gold-darker:  #8a6e2a;
 
-    body {
-      background: var(--cream);
-      color: var(--text);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    --cream:        #faf2e0;
+    --cream-warm:   #f5ede0;
+    --cream-paper:  #f0e3c5;
+    --text-dark:    #1f2e26;
+    --text-mid:     #4a5a50;
+  }
 
-    /* ── Nav ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem 2rem;
-      background: transparent;
-    }
+  html { scroll-behavior: smooth; }
 
-    nav img {
-      height: 36px;
-      width: auto;
-    }
+  body {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: #ede1c4;
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-    /* ── Hero ── */
-    .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 7rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
+  /* ==========  HEADER  ========== */
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 14px 30px;
+    background: rgba(13, 22, 17, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .site-header .header-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+  @media (max-width: 600px) {
+    .site-header { padding: 10px 18px; }
+    .site-header .header-logo { height: 34px; }
+  }
 
-    /* Soft radial glow behind content */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,168,76,0.10) 0%, transparent 70%);
-      pointer-events: none;
-    }
+  /* ==========  ORNAMENT  ========== */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto;
+  }
+  .ornament .line {
+    width: 70px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-bright), var(--gold), transparent);
+    box-shadow: 0 0 8px rgba(201, 169, 97, 0.4);
+  }
+  .ornament .mark {
+    color: var(--gold-bright);
+    font-size: 11px;
+    transform: rotate(45deg);
+    text-shadow: 0 0 12px rgba(224, 192, 116, 0.6);
+  }
 
-    /* Animated botanical ornament */
-    .ornament {
-      display: block;
-      font-size: 2rem;
-      color: var(--gold);
-      letter-spacing: 0.3em;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.2s;
-    }
+  /* ==========  HERO  ========== */
+  .gracias-hero {
+    flex: 1;
+    background-color: var(--cream-paper);
+    background-image:
+      radial-gradient(ellipse at 15% 5%, rgba(201, 169, 97, 0.22) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 95%, rgba(201, 169, 97, 0.18) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(70, 96, 79, 0.04) 0%, transparent 70%);
+    padding: 140px 30px 100px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+    overflow: hidden;
+  }
+  .gracias-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paper1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.4 0 0 0 0 0.2 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper1)'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gracias-hero > * { position: relative; z-index: 1; }
 
-    .check-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.3s;
-    }
+  /* Checkmark seal */
+  .seal {
+    width: 92px;
+    height: 92px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 36px;
+    background: linear-gradient(135deg, rgba(224, 192, 116, 0.18), rgba(201, 169, 97, 0.08));
+    box-shadow:
+      0 0 0 8px rgba(201, 169, 97, 0.08),
+      0 8px 24px rgba(54, 81, 63, 0.18);
+    animation: sealIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .seal svg {
+    width: 38px;
+    height: 38px;
+    stroke: var(--gold-darker);
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: drawCheck 0.6s ease-out 0.5s forwards;
+  }
+  @keyframes sealIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
 
-    .check-circle svg {
-      width: 30px;
-      height: 30px;
-      stroke: var(--gold);
-      stroke-width: 1.5;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+  .eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-darker);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .gracias-title {
+    font-family: 'Italiana', serif;
+    color: var(--green-darker);
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+  .gracias-title em {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold-darker);
+    margin-top: 8px;
+  }
 
-    .eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
+  .ornament-spacer {
+    margin: 36px auto 32px;
+  }
+
+  .gracias-lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: clamp(20px, 2.2vw, 23px);
+    line-height: 1.6;
+    max-width: 560px;
+    margin: 0 auto 60px;
+    font-weight: 500;
+  }
+
+  /* ==========  DETAILS CARD  ========== */
+  .ceremony-card {
+    max-width: 560px;
+    margin: 0 auto 50px;
+    background:
+      linear-gradient(135deg, rgba(13, 22, 17, 0.6) 0%, rgba(28, 43, 35, 0.5) 100%);
+    border: 1px solid rgba(224, 192, 116, 0.35);
+    padding: 48px 44px;
+    box-shadow:
+      0 12px 36px rgba(0, 0, 0, 0.18),
+      inset 0 1px 0 rgba(224, 192, 116, 0.18);
+    position: relative;
+    text-align: left;
+  }
+  .ceremony-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 25%; right: 25%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(224, 192, 116, 0.65), transparent);
+    pointer-events: none;
+  }
+
+  .card-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-bright);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 28px;
+    opacity: 0.95;
+  }
+
+  .detail-row {
+    display: flex;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(224, 192, 116, 0.18);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row .glyph {
+    color: var(--gold);
+    font-size: 8px;
+    padding-top: 14px;
+    min-width: 14px;
+    transform: rotate(45deg);
+    opacity: 0.9;
+  }
+  .detail-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--gold-bright);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 1;
+  }
+  .detail-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--cream);
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .detail-value .sub {
+    display: block;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(250, 242, 224, 0.85);
+    margin-top: 6px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ==========  NEXT STEPS  ========== */
+  .next-section {
+    max-width: 560px;
+    margin: 0 auto 60px;
+    text-align: left;
+  }
+  .next-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold-darker);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .step {
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
+  .step-num {
+    font-family: 'Italiana', serif;
+    color: var(--gold-darker);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+    background: rgba(224, 192, 116, 0.08);
+  }
+  .step-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.65;
+    color: var(--text-dark);
+    padding-top: 4px;
+  }
+
+  /* ==========  CTAs  ========== */
+  .cta-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 18px 56px;
+    background: linear-gradient(135deg, var(--gold-rich) 0%, var(--gold-bright) 50%, var(--gold) 100%);
+    color: var(--green-darker);
+    font-family: 'Italiana', serif;
+    font-size: 15px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(160, 136, 81, 0.6);
+    box-shadow:
+      0 6px 22px rgba(54, 81, 63, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 10px 28px rgba(54, 81, 63, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+  .btn-ghost {
+    display: inline-block;
+    padding: 12px 28px;
+    color: var(--text-mid);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .btn-ghost:hover {
+    color: var(--green-darker);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ==========  FOOTER  ========== */
+  footer {
+    background: var(--green-shadow);
+    color: var(--cream-warm);
+    padding: 60px 30px 50px;
+    text-align: center;
+    position: relative;
+  }
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .footer-logo {
+    width: 80px;
+    margin: 0 auto 20px;
+    opacity: 0.85;
+  }
+  .footer-name {
+    font-family: 'Italiana', serif;
+    color: var(--gold-bright);
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(245, 237, 224, 0.55);
+    letter-spacing: 0.05em;
+  }
+
+  /* ==========  ENTRANCE ANIMATIONS  ========== */
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.9s ease-out forwards;
+  }
+  .fade-up.d1 { animation-delay: 0.15s; }
+  .fade-up.d2 { animation-delay: 0.3s; }
+  .fade-up.d3 { animation-delay: 0.5s; }
+  .fade-up.d4 { animation-delay: 0.7s; }
+  .fade-up.d5 { animation-delay: 0.85s; }
+  .fade-up.d6 { animation-delay: 1s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ==========  RESPONSIVE  ========== */
+  @media (max-width: 600px) {
+    .gracias-hero { padding: 110px 22px 70px; }
+    .ceremony-card { padding: 32px 24px; }
+    .next-section { padding: 0 8px; }
+    .btn-primary {
+      padding: 16px 40px;
+      font-size: 13px;
       letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.4s;
     }
-
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      line-height: 1.15;
-      color: var(--sage);
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.5s;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      justify-content: center;
-      margin: 1.6rem auto;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.6s;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: '';
-      display: block;
-      width: 48px;
-      height: 1px;
-      background: var(--gold);
-      opacity: 0.5;
-    }
-
-    .divider-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-
-    .intro {
-      font-size: 1.15rem;
-      font-weight: 300;
-      color: var(--text);
-      max-width: 480px;
-      margin: 0 auto 3rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.7s;
-    }
-
-    /* ── Details card ── */
-    .card {
-      background: white;
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 2px;
-      padding: 2.4rem 2.8rem;
-      max-width: 440px;
-      width: 100%;
-      margin: 0 auto 3rem;
-      text-align: left;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 0.85s;
-    }
-
-    .card-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.6rem;
-    }
-
-    .detail-row {
-      display: flex;
-      gap: 1rem;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-
-    .detail-row:last-child { border-bottom: none; }
-
-    .detail-icon {
-      color: var(--gold);
-      font-size: 1rem;
-      min-width: 20px;
-      padding-top: 2px;
-    }
-
-    .detail-label {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.2rem;
-    }
-
-    .detail-value {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    /* ── Next steps ── */
-    .next {
-      max-width: 440px;
-      width: 100%;
-      margin: 0 auto 3.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 1s;
-    }
-
-    .next-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.4rem;
-      text-align: center;
-    }
-
-    .step {
-      display: flex;
-      gap: 1.2rem;
-      align-items: flex-start;
-      margin-bottom: 1.2rem;
-    }
-
-    .step-num {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .step-text {
-      font-size: 0.95rem;
-      font-weight: 300;
-      line-height: 1.55;
-      color: var(--text);
-    }
-
-    /* ── CTA ── */
-    .cta-wrap {
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 1.1s;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.9rem 2.6rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--dark);
-      background: var(--gold);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .btn:hover {
-      background: var(--sage);
-      color: white;
-    }
-
-    .btn-ghost {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.7rem 2rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--sage);
-      border: 1px solid var(--sage);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .btn-ghost:hover {
-      background: var(--sage);
-      color: white;
-    }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      border-top: 1px solid rgba(201,168,76,0.2);
-      margin-top: auto;
-    }
-
-    footer img {
-      height: 32px;
-      margin-bottom: 0.8rem;
-      opacity: 0.7;
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      color: var(--text);
-      opacity: 0.5;
-      letter-spacing: 0.05em;
-    }
-
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .card, .next { padding: 1.8rem 1.4rem; }
-      h1 { font-size: 2.2rem; }
-    }
-  </style>
+    .seal { width: 76px; height: 76px; }
+    .seal svg { width: 32px; height: 32px; }
+  }
+</style>
 </head>
+
 <body>
 
-  <nav>
-    <a href="/"><img src="logo.png" alt="Alma Sonora" /></a>
-  </nav>
+  <header class="site-header">
+    <a href="/"><img src="logo.png" class="header-logo" alt="Alma Sonora"></a>
+  </header>
 
-  <main class="hero">
+  <main class="gracias-hero">
 
-    <span class="ornament">◆</span>
-
-    <div class="check-circle">
+    <div class="seal fade-up">
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
 
-    <p class="eyebrow">Reserva confirmada</p>
+    <p class="eyebrow fade-up d1">Reserva confirmada</p>
 
-    <h1>Tu espacio está<br><em>reservado</em></h1>
+    <h1 class="gracias-title fade-up d2">
+      Tu espacio está
+      <em>reservado</em>
+    </h1>
 
-    <div class="divider"><span class="divider-dot"></span></div>
+    <div class="ornament ornament-spacer fade-up d3">
+      <div class="line"></div>
+      <span class="mark">◆</span>
+      <div class="line"></div>
+    </div>
 
-    <p class="intro">
+    <p class="gracias-lead fade-up d3">
       Gracias por elegir estar. Recibirás un correo de confirmación en los próximos minutos con todos los detalles.
     </p>
 
-    <!-- Event details card -->
-    <div class="card">
-      <p class="card-title">Tu ceremonia</p>
+    <!-- Ceremony details card -->
+    <div class="ceremony-card fade-up d4">
+      <p class="card-eyebrow">Tu ceremonia</p>
 
       <div class="detail-row">
-        <span class="detail-icon">◆</span>
+        <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Evento</p>
-          <p class="detail-value">Cacao & Sonido · Alma Sonora</p>
+          <p class="detail-value">Cacao &amp; Sonido<span class="sub">Una mañana ceremonial · Alma Sonora</span></p>
         </div>
       </div>
 
       <div class="detail-row">
-        <span class="detail-icon">◆</span>
+        <span class="glyph">◆</span>
         <div>
-          <p class="detail-label">Fecha & hora</p>
-          <p class="detail-value">Domingo 24 de Mayo, 2026<br>10:00 AM · 2 horas aprox.</p>
+          <p class="detail-label">Fecha &amp; hora</p>
+          <p class="detail-value">Domingo 24 de Mayo<span class="sub">10:00 AM · 2 horas aprox.</span></p>
         </div>
       </div>
 
       <div class="detail-row">
-        <span class="detail-icon">◆</span>
+        <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Lugar</p>
-          <p class="detail-value">Espacio Alma Sonora · Bird Road, Miami<br><em style="font-size:0.85rem;opacity:0.7">Dirección exacta 48 horas antes</em></p>
+          <p class="detail-value">Espacio Alma Sonora<span class="sub">Bird Road, Miami · Dirección exacta 48 horas antes</span></p>
         </div>
       </div>
 
       <div class="detail-row">
-        <span class="detail-icon">◆</span>
+        <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Qué traer</p>
-          <p class="detail-value">Ropa cómoda · manta · agua · antifaz opcional<br>Llegar con estómago liviano</p>
+          <p class="detail-value">Ropa cómoda · manta · agua<span class="sub">Antifaz opcional · estómago liviano</span></p>
         </div>
       </div>
     </div>
 
     <!-- Next steps -->
-    <div class="next">
+    <div class="next-section fade-up d5">
       <p class="next-title">Lo que sigue</p>
 
       <div class="step">
         <span class="step-num">1</span>
-        <p class="step-text">Revisa tu correo — te enviamos la confirmación de pago y los detalles del encuentro.</p>
+        <p class="step-text">Revisa tu correo — te enviamos la confirmación de pago y los primeros detalles del encuentro.</p>
       </div>
 
       <div class="step">
         <span class="step-num">2</span>
-        <p class="step-text">48 horas antes del evento recibirás la dirección exacta y los últimos detalles.</p>
+        <p class="step-text">48 horas antes del evento recibirás la dirección exacta y los últimos detalles para preparar tu llegada.</p>
       </div>
 
       <div class="step">
         <span class="step-num">3</span>
-        <p class="step-text">¿Dudas o preguntas? Escríbenos por WhatsApp — estamos aquí.</p>
+        <p class="step-text">¿Dudas o preguntas? Escríbenos por WhatsApp — estamos aquí para acompañarte.</p>
       </div>
     </div>
 
     <!-- CTAs -->
-    <div class="cta-wrap">
-      <a href="https://wa.me/18097787500" class="btn">Escribir por WhatsApp</a>
-      <br>
+    <div class="cta-stack fade-up d6">
+      <a href="https://wa.me/18097787500" class="btn-primary" target="_blank" rel="noopener">Escribir por WhatsApp</a>
       <a href="/" class="btn-ghost">Volver al inicio</a>
     </div>
 
   </main>
 
   <footer>
-    <img src="logo.png" alt="Alma Sonora" />
-    <p>© 2026 Alma Sonora · alma-sonora.com · Miami, FL</p>
+    <img src="logo.png" class="footer-logo" alt="Alma Sonora">
+    <div class="footer-name">Alma Sonora</div>
+    <p class="footer-copy">© 2026 Alma Sonora · Miami, FL</p>
   </footer>
 
 </body>
