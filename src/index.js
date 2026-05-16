@@ -6,6 +6,7 @@
  *   GET  /health                       → status check
  *   GET  /api/events                   → list active events + availability
  *   GET  /api/events/:id               → single event detail
+ *   POST /api/intake                   → public intake form submission
  *   POST /webhooks/square              → Square payment webhook (HMAC-verified)
  *   GET  /api/admin/bookings           → list bookings (requires ADMIN_SECRET header)
  *   GET  /api/admin/bookings/:eventId  → bookings for one event
@@ -14,6 +15,7 @@
 import { handleSquareWebhook } from './handlers/squareWebhook.js';
 import { handleAdminBookings } from './handlers/admin.js';
 import { getEvents, getEventById } from './handlers/events.js';
+import { handleIntake } from './handlers/intake.js';
 import { corsHeaders, json, notFound, unauthorized } from './lib/response.js';
 
 export default {
@@ -39,6 +41,11 @@ export default {
       const eventMatch = path.match(/^\/api\/events\/([^/]+)$/);
       if (eventMatch && request.method === 'GET') {
         return getEventById(request, env, eventMatch[1]);
+      }
+
+      // ── Intake form submission ─────────────────────────────────
+      if (path === '/api/intake' && request.method === 'POST') {
+        return handleIntake(request, env);
       }
 
       // ── Square webhook ─────────────────────────────────────────
