@@ -395,6 +395,57 @@
     font-size: 17px;
   }
 
+  .booking-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(201, 169, 97, 0.25);
+    flex-wrap: wrap;
+  }
+  .action-btn {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid rgba(160, 136, 81, 0.4);
+    color: var(--green-darker);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .action-btn:hover {
+    background: rgba(201, 169, 97, 0.12);
+    border-color: var(--gold-darker);
+  }
+  .action-btn.confirm:hover {
+    background: rgba(74, 138, 90, 0.12);
+    border-color: var(--status-confirmed);
+    color: var(--status-confirmed);
+  }
+  .action-btn.cancel:hover {
+    background: rgba(184, 156, 74, 0.12);
+    border-color: var(--status-pending);
+    color: var(--status-pending);
+  }
+  .action-btn.delete {
+    margin-left: auto;
+    color: rgba(180, 60, 50, 0.7);
+    border-color: rgba(180, 60, 50, 0.3);
+  }
+  .action-btn.delete:hover {
+    background: rgba(180, 60, 50, 0.1);
+    border-color: var(--status-canceled);
+    color: var(--status-canceled);
+  }
+  .action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 600px) {
     .admin-header { padding: 14px 18px; }
     .admin-header .title { font-size: 14px; letter-spacing: 0.22em; }
@@ -585,8 +636,21 @@
           const notes = b.notes || '';
           const phoneClean = phone.replace(/\D/g, '');
 
+          // Action buttons based on current status
+          let actions = '';
+          if (status === 'pending') {
+            actions += `<button class="action-btn confirm" data-action="confirm" data-id="${escapeAttr(b.id)}">✓ Confirmar</button>`;
+            actions += `<button class="action-btn cancel" data-action="cancel" data-id="${escapeAttr(b.id)}">Cancelar</button>`;
+          } else if (status === 'confirmed') {
+            actions += `<button class="action-btn cancel" data-action="cancel" data-id="${escapeAttr(b.id)}">Cancelar</button>`;
+            actions += `<button class="action-btn" data-action="pending" data-id="${escapeAttr(b.id)}">↶ Marcar pendiente</button>`;
+          } else {
+            actions += `<button class="action-btn" data-action="pending" data-id="${escapeAttr(b.id)}">↶ Reactivar</button>`;
+          }
+          actions += `<button class="action-btn delete" data-action="delete" data-id="${escapeAttr(b.id)}" data-name="${escapeAttr(name)}">Eliminar</button>`;
+
           return `
-            <div class="booking-card">
+            <div class="booking-card" data-id="${escapeAttr(b.id)}">
               <div class="booking-head">
                 <div class="booking-name">${escapeHtml(name)}</div>
                 <span class="booking-status status-${status}">${statusLabel(status)}</span>
@@ -603,9 +667,75 @@
                 </div>
               </div>
               ${notes ? `<div class="booking-notes">${escapeHtml(notes)}</div>` : ''}
+              <div class="booking-actions">${actions}</div>
             </div>
           `;
         }).join('') + '</div>';
+
+        // Attach action listeners
+        bookingsContainer.querySelectorAll('.action-btn').forEach(function(btn) {
+          btn.addEventListener('click', handleAction);
+        });
+      }
+
+      async function handleAction(e) {
+        const btn = e.currentTarget;
+        const action = btn.dataset.action;
+        const id = btn.dataset.id;
+        const secret = sessionStorage.getItem(SECRET_KEY);
+        if (!secret || !id) return;
+
+        // Confirm destructive actions
+        if (action === 'delete') {
+          const name = btn.dataset.name || 'esta reserva';
+          if (!confirm(`¿Eliminar permanentemente la reserva de ${name}? Esta acción no se puede deshacer.`)) {
+            return;
+          }
+        }
+        if (action === 'cancel') {
+          if (!confirm('¿Cancelar esta reserva?')) return;
+        }
+
+        // Disable all buttons in this card during request
+        const card = btn.closest('.booking-card');
+        card.querySelectorAll('.action-btn').forEach(b => b.disabled = true);
+
+        try {
+          let res;
+          if (action === 'delete') {
+            res = await fetch(API_BASE + '/api/admin/bookings/' + id, {
+              method: 'DELETE',
+              headers: { 'x-admin-secret': secret }
+            });
+          } else {
+            // status changes
+            const statusMap = {
+              confirm: 'confirmed',
+              cancel:  'canceled',
+              pending: 'pending',
+            };
+            const newStatus = statusMap[action];
+            res = await fetch(API_BASE + '/api/admin/bookings/' + id, {
+              method: 'PATCH',
+              headers: {
+                'x-admin-secret': secret,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ status: newStatus })
+            });
+          }
+
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error || ('Error ' + res.status));
+          }
+
+          // Reload list
+          await loadBookings(secret);
+        } catch (err) {
+          alert('Error: ' + (err.message || 'desconocido'));
+          card.querySelectorAll('.action-btn').forEach(b => b.disabled = false);
+        }
       }
 
       function statusLabel(status) {
