@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block admin and thank-you pages from indexing
+Disallow: /admin.html
+Disallow: /gracias.html
+Disallow: /gracias
+
+Sitemap: https://alma-sonora.com/sitemap.xml
