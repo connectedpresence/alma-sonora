@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Alma Sonora</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" type="image/png" href="favicon-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Italiana&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-mid:    #46604f;
+    --green-deep:   #36513f;
+    --green-darker: #213829;
+    --green-shadow: #0d1611;
+
+    --gold:         #c9a961;
+    --gold-bright:  #e0c074;
+    --gold-darker:  #8a6e2a;
+
+    --cream:        #faf2e0;
+    --cream-paper:  #f0e3c5;
+    --text-dark:    #1f2e26;
+    --text-mid:     #4a5a50;
+
+    --status-confirmed: #4a8a5a;
+    --status-pending:   #b89c4a;
+    --status-canceled:  #b43c32;
+  }
+
+  body {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    background: #ede1c4;
+    background-image:
+      radial-gradient(ellipse at 0% 0%, rgba(201, 169, 97, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 100%, rgba(70, 96, 79, 0.06) 0%, transparent 50%);
+    font-size: 17px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ==========  HEADER  ========== */
+  .admin-header {
+    background: var(--green-shadow);
+    color: var(--cream);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.3);
+  }
+  .admin-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .admin-header img {
+    height: 36px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+  .admin-header .title {
+    font-family: 'Italiana', serif;
+    color: var(--gold-bright);
+    font-size: 18px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .admin-header .logout {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid rgba(201, 169, 97, 0.4);
+    padding: 8px 16px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+  .admin-header .logout:hover {
+    border-color: var(--gold);
+    background: rgba(201, 169, 97, 0.1);
+  }
+
+  /* ==========  LOGIN  ========== */
+  .login-wrap {
+    max-width: 420px;
+    margin: 80px auto;
+    padding: 50px 40px;
+    background: var(--cream-paper);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(54, 81, 63, 0.1);
+    position: relative;
+  }
+  .login-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 25%; right: 25%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .login-wrap h1 {
+    font-family: 'Italiana', serif;
+    color: var(--green-darker);
+    font-size: 32px;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .login-wrap p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    font-size: 16px;
+  }
+  .login-wrap input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: var(--text-dark);
+    background: white;
+    border: 1px solid rgba(160, 136, 81, 0.3);
+    margin-bottom: 18px;
+  }
+  .login-wrap input:focus {
+    outline: none;
+    border-color: var(--gold-darker);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.15);
+  }
+  .login-wrap button {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #d4b876 0%, var(--gold-bright) 50%, var(--gold) 100%);
+    color: var(--green-darker);
+    font-family: 'Italiana', serif;
+    font-size: 14px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    border: 1px solid rgba(160, 136, 81, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(54, 81, 63, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .login-wrap button:hover {
+    transform: translateY(-1px);
+  }
+  .login-error {
+    margin-top: 16px;
+    padding: 10px;
+    background: rgba(180, 60, 50, 0.08);
+    border-left: 3px solid var(--status-canceled);
+    color: #8a2e26;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    text-align: left;
+    display: none;
+  }
+  .login-error.show { display: block; }
+
+  /* ==========  MAIN  ========== */
+  .admin-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+  }
+
+  /* Stats grid */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat {
+    background: var(--cream-paper);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    padding: 24px 22px;
+    text-align: center;
+    position: relative;
+  }
+  .stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .stat-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--gold-darker);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: 'Italiana', serif;
+    color: var(--green-darker);
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 14px;
+  }
+
+  /* Section */
+  .section-title {
+    font-family: 'Italiana', serif;
+    color: var(--green-darker);
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .section-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--gold-darker);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .refresh-btn {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--green-darker);
+    background: transparent;
+    border: 1px solid var(--gold);
+    padding: 8px 18px;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+  .refresh-btn:hover {
+    background: rgba(201, 169, 97, 0.15);
+  }
+
+  /* Booking card */
+  .bookings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .booking-card {
+    background: var(--cream-paper);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    padding: 26px 28px;
+    position: relative;
+    transition: all 0.25s ease;
+  }
+  .booking-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 6px 20px rgba(54, 81, 63, 0.12);
+  }
+  .booking-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .booking-name {
+    font-family: 'Italiana', serif;
+    color: var(--green-darker);
+    font-size: 22px;
+    letter-spacing: 0.02em;
+  }
+  .booking-status {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 0;
+    white-space: nowrap;
+  }
+  .status-confirmed {
+    background: rgba(74, 138, 90, 0.15);
+    color: var(--status-confirmed);
+    border: 1px solid rgba(74, 138, 90, 0.4);
+  }
+  .status-pending {
+    background: rgba(184, 156, 74, 0.15);
+    color: var(--status-pending);
+    border: 1px solid rgba(184, 156, 74, 0.4);
+  }
+  .status-canceled, .status-refunded, .status-failed {
+    background: rgba(180, 60, 50, 0.08);
+    color: var(--status-canceled);
+    border: 1px solid rgba(180, 60, 50, 0.3);
+  }
+  .booking-meta {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-mid);
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .booking-contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 28px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(201, 169, 97, 0.25);
+    border-bottom: 1px solid rgba(201, 169, 97, 0.25);
+    margin-bottom: 14px;
+  }
+  .contact-item .label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--gold-darker);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .contact-item .value {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-dark);
+    font-size: 15px;
+    font-weight: 500;
+    word-break: break-word;
+  }
+  .contact-item .value a {
+    color: var(--green-darker);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.4);
+  }
+  .contact-item .value a:hover {
+    color: var(--gold-darker);
+  }
+  .booking-notes {
+    font-family: 'EB Garamond', serif;
+    color: var(--text-dark);
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-line;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 14px 16px;
+    border-left: 3px solid var(--gold);
+  }
+  .booking-notes:empty {
+    display: none;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 30px;
+    color: var(--text-mid);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+  }
+  .loading {
+    text-align: center;
+    padding: 60px 30px;
+    color: var(--gold-darker);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  @media (max-width: 600px) {
+    .admin-header { padding: 14px 18px; }
+    .admin-header .title { font-size: 14px; letter-spacing: 0.22em; }
+    .admin-main { padding: 24px 16px 60px; }
+    .booking-card { padding: 20px 18px; }
+    .booking-contact { grid-template-columns: 1fr; gap: 10px; }
+    .stats { gap: 10px; }
+    .stat { padding: 18px 14px; }
+    .stat-value { font-size: 32px; }
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- ==========  LOGIN VIEW  ========== -->
+  <div id="login-view">
+    <div class="login-wrap">
+      <h1>Admin</h1>
+      <p>Ingresa el código de acceso</p>
+      <form id="login-form">
+        <input
+          type="password"
+          id="secret-input"
+          placeholder="Código de acceso"
+          autocomplete="current-password"
+          required>
+        <button type="submit">Entrar</button>
+        <div class="login-error" id="login-error">Código incorrecto</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========  ADMIN VIEW  ========== -->
+  <div id="admin-view" style="display:none;">
+    <header class="admin-header">
+      <div class="brand">
+        <img src="logo.png" alt="Alma Sonora">
+        <span class="title">Alma Sonora · Admin</span>
+      </div>
+      <button class="logout" id="logout-btn">Salir</button>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- Stats -->
+      <div class="stats" id="stats-container"></div>
+
+      <!-- Bookings -->
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow">Reservas</p>
+          <h2 class="section-title">Todas las reservas</h2>
+        </div>
+        <button class="refresh-btn" id="refresh-btn">↻ Actualizar</button>
+      </div>
+
+      <div id="bookings-container">
+        <div class="loading">Cargando reservas...</div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      const API_BASE = 'https://alma-sonora-bookings.connect-c36.workers.dev';
+      const SECRET_KEY = 'alma_admin_secret';
+
+      const loginView = document.getElementById('login-view');
+      const adminView = document.getElementById('admin-view');
+      const loginForm = document.getElementById('login-form');
+      const secretInput = document.getElementById('secret-input');
+      const loginError = document.getElementById('login-error');
+      const logoutBtn = document.getElementById('logout-btn');
+      const refreshBtn = document.getElementById('refresh-btn');
+      const statsContainer = document.getElementById('stats-container');
+      const bookingsContainer = document.getElementById('bookings-container');
+
+      // Check for saved secret
+      const saved = sessionStorage.getItem(SECRET_KEY);
+      if (saved) {
+        tryLoad(saved);
+      }
+
+      // Login submit
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const secret = secretInput.value.trim();
+        if (!secret) return;
+        tryLoad(secret);
+      });
+
+      // Logout
+      logoutBtn.addEventListener('click', function() {
+        sessionStorage.removeItem(SECRET_KEY);
+        adminView.style.display = 'none';
+        loginView.style.display = '';
+        secretInput.value = '';
+      });
+
+      // Refresh
+      refreshBtn.addEventListener('click', function() {
+        const secret = sessionStorage.getItem(SECRET_KEY);
+        if (secret) loadBookings(secret);
+      });
+
+      async function tryLoad(secret) {
+        loginError.classList.remove('show');
+        try {
+          const res = await fetch(API_BASE + '/api/admin/bookings', {
+            headers: { 'x-admin-secret': secret }
+          });
+
+          if (!res.ok) {
+            if (res.status === 401) {
+              loginError.textContent = 'Código incorrecto';
+              loginError.classList.add('show');
+              sessionStorage.removeItem(SECRET_KEY);
+              return;
+            }
+            throw new Error('Error ' + res.status);
+          }
+
+          const data = await res.json();
+          sessionStorage.setItem(SECRET_KEY, secret);
+          loginView.style.display = 'none';
+          adminView.style.display = '';
+          renderData(data);
+        } catch (err) {
+          loginError.textContent = 'Error de conexión: ' + (err.message || 'desconocido');
+          loginError.classList.add('show');
+        }
+      }
+
+      async function loadBookings(secret) {
+        bookingsContainer.innerHTML = '<div class="loading">Cargando reservas...</div>';
+        try {
+          const res = await fetch(API_BASE + '/api/admin/bookings', {
+            headers: { 'x-admin-secret': secret }
+          });
+          if (!res.ok) throw new Error('Error ' + res.status);
+          const data = await res.json();
+          renderData(data);
+        } catch (err) {
+          bookingsContainer.innerHTML = '<div class="empty-state">Error: ' + (err.message || '') + '</div>';
+        }
+      }
+
+      function renderData(data) {
+        renderStats(data.summary || []);
+        renderBookings(data.bookings || []);
+      }
+
+      function renderStats(summary) {
+        if (!summary.length) {
+          statsContainer.innerHTML = '';
+          return;
+        }
+        statsContainer.innerHTML = summary.map(function(e) {
+          const confirmed = e.confirmed_spots || 0;
+          const pending = e.pending_count || 0;
+          const remaining = (e.capacity || 0) - confirmed - pending;
+          return `
+            <div class="stat">
+              <div class="stat-label">${escapeHtml(e.title)}</div>
+              <div class="stat-value">${confirmed}/${e.capacity}</div>
+              <div class="stat-sub">${pending} pendiente${pending !== 1 ? 's' : ''} · ${remaining} disponible${remaining !== 1 ? 's' : ''}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderBookings(bookings) {
+        if (!bookings.length) {
+          bookingsContainer.innerHTML = '<div class="empty-state">Aún no hay reservas — cuando alguien complete el formulario aparecerá aquí.</div>';
+          return;
+        }
+
+        bookingsContainer.innerHTML = '<div class="bookings-grid">' + bookings.map(function(b) {
+          const name = b.customer_name || '(sin nombre)';
+          const email = b.customer_email || '';
+          const phone = b.customer_phone || '';
+          const status = b.status || 'pending';
+          const created = formatDate(b.created_at);
+          const eventTitle = b.event_title || '';
+          const eventDate = b.event_date || '';
+          const notes = b.notes || '';
+          const phoneClean = phone.replace(/\D/g, '');
+
+          return `
+            <div class="booking-card">
+              <div class="booking-head">
+                <div class="booking-name">${escapeHtml(name)}</div>
+                <span class="booking-status status-${status}">${statusLabel(status)}</span>
+              </div>
+              <div class="booking-meta">${escapeHtml(eventTitle)} · ${escapeHtml(eventDate)} · reservó ${created}</div>
+              <div class="booking-contact">
+                <div class="contact-item">
+                  <div class="label">Email</div>
+                  <div class="value"><a href="mailto:${escapeAttr(email)}">${escapeHtml(email)}</a></div>
+                </div>
+                <div class="contact-item">
+                  <div class="label">WhatsApp</div>
+                  <div class="value">${phoneClean ? `<a href="https://wa.me/${phoneClean}" target="_blank" rel="noopener">${escapeHtml(phone)}</a>` : '(no proporcionado)'}</div>
+                </div>
+              </div>
+              ${notes ? `<div class="booking-notes">${escapeHtml(notes)}</div>` : ''}
+            </div>
+          `;
+        }).join('') + '</div>';
+      }
+
+      function statusLabel(status) {
+        const map = {
+          confirmed: 'Confirmado',
+          pending:   'Pendiente',
+          canceled:  'Cancelado',
+          refunded:  'Reembolsado',
+          failed:    'Fallido'
+        };
+        return map[status] || status;
+      }
+
+      function formatDate(s) {
+        if (!s) return '';
+        try {
+          const d = new Date(s.replace(' ', 'T') + 'Z');
+          return d.toLocaleString('es-ES', {
+            day: 'numeric', month: 'short',
+            hour: '2-digit', minute: '2-digit'
+          });
+        } catch { return s; }
+      }
+
+      function escapeHtml(s) {
+        if (s == null) return '';
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s);
+      }
+    })();
+  </script>
+
+</body>
+</html>
