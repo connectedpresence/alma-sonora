@@ -256,19 +256,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 24px;
-    font-family: 'Italiana', serif;
-    font-size: 17px;
-    letter-spacing: 0.22em;
+    gap: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--gold-bright);
+    color: var(--cream);
     margin-bottom: 40px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);
     flex-wrap: wrap;
   }
   .hero-meta .dot {
-    color: var(--gold);
-    opacity: 0.6;
+    color: var(--gold-bright);
+    opacity: 0.9;
+    font-size: 9px;
+    transform: translateY(-1px);
   }
   .btn-primary {
     display: inline-block;
@@ -599,6 +602,36 @@
     margin: 0 auto;
   }
 
+  .facilitators-together {
+    max-width: 720px;
+    margin: 56px auto 0;
+    padding: 28px 32px 0;
+    border-top: 1px solid rgba(160, 136, 81, 0.25);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #2c3e34;
+    font-size: clamp(18px, 2.1vw, 22px);
+    line-height: 1.7;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .facilitators-together::before {
+    content: '◆';
+    display: block;
+    color: var(--gold);
+    opacity: 0.7;
+    font-size: 10px;
+    margin-bottom: 22px;
+    letter-spacing: 0.3em;
+  }
+  @media (max-width: 600px) {
+    .facilitators-together {
+      padding: 24px 16px 0;
+      font-size: 17px;
+    }
+  }
+
   /* ==========  GROUP IMAGE BREAK  ========== */
   .group-break {
     padding: 0;
@@ -878,10 +911,12 @@
     line-height: 1.5;
   }
   .footer-contact {
-    font-family: 'Italiana', serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
     color: var(--gold);
     font-size: 14px;
-    letter-spacing: 0.32em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     margin-bottom: 36px;
   }
@@ -970,6 +1005,171 @@
     opacity: 0.5;
     margin: 0 14px;
   }
+
+  /* ==========================================================
+     COUNTDOWN TIMER (hero) — elegant inline style
+     ========================================================== */
+  .countdown {
+    margin: 28px auto 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out 0.8s forwards;
+    color: var(--cream);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  }
+  .countdown-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold-bright);
+    font-size: 15px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .countdown-units {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .countdown-unit {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .countdown-unit-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--cream);
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .countdown-unit-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: rgba(245, 237, 224, 0.85);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+  }
+  .countdown-sep {
+    color: var(--gold);
+    opacity: 0.55;
+    font-size: 9px;
+    margin: 0 -4px;
+  }
+  .countdown.ended .countdown-units,
+  .countdown.ended .countdown-sep { display: none; }
+  .countdown.ended .countdown-label {
+    color: var(--gold-bright);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ==========================================================
+     SEATS REMAINING (reserva section)
+     ========================================================== */
+  .seats-counter {
+    margin: 0 auto 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 22px;
+    background: rgba(58, 74, 63, 0.06);
+    border: 1px solid rgba(160, 136, 81, 0.35);
+    border-radius: 0;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out 0.2s forwards;
+  }
+  .seats-counter.loading {
+    opacity: 0.4;
+  }
+  .seats-counter .dot-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-darker);
+    box-shadow: 0 0 8px rgba(201, 169, 97, 0.5);
+    flex-shrink: 0;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+  .seats-counter-text {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--green-darker);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .seats-counter-text strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--gold-darker);
+  }
+
+  /* Low seats - warm urgency */
+  .seats-counter.low {
+    background: rgba(184, 120, 60, 0.08);
+    border-color: rgba(160, 100, 50, 0.4);
+  }
+  .seats-counter.low .dot-indicator {
+    background: #b8783c;
+    box-shadow: 0 0 10px rgba(184, 120, 60, 0.6);
+  }
+  .seats-counter.low .seats-counter-text strong {
+    color: #8a5a2a;
+  }
+
+  /* Sold out */
+  .seats-counter.sold-out {
+    background: rgba(70, 96, 79, 0.1);
+    border-color: rgba(70, 96, 79, 0.45);
+  }
+  .seats-counter.sold-out .dot-indicator {
+    background: var(--green-mid);
+    animation: none;
+    opacity: 0.6;
+  }
+  .seats-counter.sold-out .seats-counter-text strong {
+    color: var(--green-darker);
+  }
+
+  /* Sold-out state for button */
+  .reserva.sold-out .btn-primary {
+    background: linear-gradient(135deg, rgba(70, 96, 79, 0.85), rgba(54, 81, 63, 0.85));
+    color: var(--cream);
+    border-color: var(--green-deep);
+    pointer-events: none;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  @media (max-width: 600px) {
+    .countdown { gap: 12px; margin-top: 22px; }
+    .countdown-label { font-size: 12px; letter-spacing: 0.25em; flex-basis: 100%; text-align: center; }
+    .countdown-units { gap: 10px; }
+    .countdown-unit { gap: 6px; }
+    .countdown-unit-value { font-size: 22px; }
+    .countdown-unit-label { font-size: 12px; }
+    .seats-counter { padding: 9px 18px; }
+    .seats-counter-text { font-size: 14px; }
+  }
 </style>
 </head>
 <body>
@@ -992,6 +1192,27 @@
       <span>Domingo · 24 de Mayo</span>
       <span class="dot">◆</span>
       <span>Miami</span>
+    </div>
+
+    <!-- Countdown to event -->
+    <div class="countdown" id="countdown" data-event-iso="2026-05-24T10:00:00-04:00">
+      <span class="countdown-label">Faltan</span>
+      <div class="countdown-units">
+        <span class="countdown-unit">
+          <span class="countdown-unit-value" data-unit="days">—</span>
+          <span class="countdown-unit-label">días</span>
+        </span>
+        <span class="countdown-sep">◆</span>
+        <span class="countdown-unit">
+          <span class="countdown-unit-value" data-unit="hours">—</span>
+          <span class="countdown-unit-label">hrs</span>
+        </span>
+        <span class="countdown-sep">◆</span>
+        <span class="countdown-unit">
+          <span class="countdown-unit-value" data-unit="minutes">—</span>
+          <span class="countdown-unit-label">min</span>
+        </span>
+      </div>
     </div>
     <a href="#reservar" class="btn-primary">Reservar mi espacio</a>
   </div>
@@ -1088,30 +1309,36 @@
 
     <div class="facilitators">
       <div class="facilitator">
-        <div class="facilitator-photo karina" role="img" aria-label="Karina, terapeuta holística de Alma Sonora"></div>
-        <div class="facilitator-name">Karina</div>
-        <div class="facilitator-role">Terapeuta holística de bienestar</div>
+        <div class="facilitator-photo karina" role="img" aria-label="Karina Ríos, fundadora de Alma Sonora"></div>
+        <div class="facilitator-name">Karina Ríos</div>
+        <div class="facilitator-role">Fundadora · Terapeuta de Sonido</div>
         <p class="facilitator-bio">
-          Karina es la fundadora de Alma Sonora — un espacio dedicado a acompañar
-          el regreso al silencio, al cuerpo y a la frecuencia propia.
-          Formada en la Escuela Chivu Dai Hai, su trabajo se centra en sostener
-          espacios donde el sonido se vuelve medicina suave y la presencia
-          se convierte en puente hacia la sanación.
+          Karina llegó a la sonoterapia tras más de 27 años acompañando a mujeres
+          en procesos de transformación. Certificada por el Instituto de Sonoterapia
+          Española bajo la guía de Mariela Ortiz, sostiene espacios donde el sonido
+          se vuelve medicina suave y la presencia se convierte en puente hacia la sanación.
         </p>
       </div>
 
       <div class="facilitator">
-        <div class="facilitator-photo juan" role="img" aria-label="Juan, terapeuta holístico de Alma Sonora"></div>
-        <div class="facilitator-name">Juan</div>
-        <div class="facilitator-role">Terapeuta holístico de bienestar</div>
+        <div class="facilitator-photo juan" role="img" aria-label="Juan Saer, co-facilitador de Alma Sonora"></div>
+        <div class="facilitator-name">Juan Saer</div>
+        <div class="facilitator-role">Co-facilitador · Terapeuta Holístico</div>
         <p class="facilitator-bio">
-          Juan acompaña procesos de regulación del sistema nervioso a través del
-          sonido, la respiración y la presencia. Formado en la Escuela Chivu Dai Hai,
-          su trabajo se centra en crear espacios donde el cuerpo recuerda cómo
-          descansar y la mente encuentra su silencio natural.
+          Juan llegó a la sanación tras un largo camino interior — la búsqueda,
+          la pérdida y el regreso al silencio sagrado. Certificado en el método
+          CHIVU DAY HAI bajo la guía de Mariela Ortiz, integra sonoterapia,
+          respiración consciente, terapias corporales y acompañamiento desde la
+          indagación compasiva, y se entrega plenamente desde el sonido profundo de su gong.
         </p>
       </div>
     </div>
+
+    <p class="facilitators-together">
+      Juntos sostienen una danza entre lo femenino y lo masculino que no se fija
+      en un solo lado — a veces uno abre lo que el otro acuna, a veces uno guía
+      mientras el otro sostiene. Una sola escucha sostenida desde dos cuerpos.
+    </p>
   </div>
 </section>
 
@@ -1168,18 +1395,25 @@
 </section>
 
 <!-- ============ RESERVAR ============ -->
-<section class="reserva" id="reservar">
+<section class="reserva" id="reservar" data-event-id="cacao-sonido-2026-05-24">
   <div class="container">
     <div class="section-eyebrow">Tu lugar</div>
     <h2 class="section-title">Reserva tu espacio</h2>
-    <p class="section-lead">Solo 12 espacios disponibles para esta ceremonia. Al reservar, te enviaremos un breve formulario para conocer tu intención y preparar el espacio para ti.</p>
+
+    <!-- Live seats counter -->
+    <div class="seats-counter loading" id="seats-counter">
+      <span class="dot-indicator"></span>
+      <span class="seats-counter-text" id="seats-text">Consultando disponibilidad...</span>
+    </div>
+
+    <p class="section-lead">Al reservar, te enviaremos un breve formulario para conocer tu intención y preparar el espacio para ti.</p>
 
     <div class="price-block">
       <span class="price">$65</span>
       <span class="price-unit">USD</span>
     </div>
 
-    <a href="https://square.link/u/6kQsK95V" target="_blank" rel="noopener" class="btn-primary" data-square-link>Reservar mi espacio</a>
+    <a href="https://square.link/u/6kQsK95V" target="_blank" rel="noopener" class="btn-primary" id="reserva-btn" data-square-link>Reservar mi espacio</a>
 
     <p class="reserva-note">
       Al completar tu reserva, recibirás un correo de confirmación y un enlace
@@ -1216,6 +1450,115 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  })();
+
+  /* ==========================================================
+     COUNTDOWN TIMER
+     ========================================================== */
+  (function() {
+    var el = document.getElementById('countdown');
+    if (!el) return;
+
+    var eventDate = new Date(el.getAttribute('data-event-iso')).getTime();
+    if (isNaN(eventDate)) return;
+
+    var daysEl    = el.querySelector('[data-unit="days"]');
+    var hoursEl   = el.querySelector('[data-unit="hours"]');
+    var minutesEl = el.querySelector('[data-unit="minutes"]');
+    var labelEl   = el.querySelector('.countdown-label');
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function update() {
+      var now = Date.now();
+      var diff = eventDate - now;
+
+      if (diff <= 0) {
+        // Event happening or passed
+        el.classList.add('ended');
+        labelEl.textContent = 'El encuentro está sucediendo';
+        return;
+      }
+
+      var days    = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours   = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      var minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+      daysEl.textContent    = pad(days);
+      hoursEl.textContent   = pad(hours);
+      minutesEl.textContent = pad(minutes);
+
+      // Refine label based on time remaining
+      if (days === 0 && hours < 24) {
+        labelEl.textContent = 'Hoy';
+      } else if (days === 1) {
+        labelEl.textContent = 'Mañana';
+      } else {
+        labelEl.textContent = 'Faltan';
+      }
+    }
+
+    update();
+    setInterval(update, 60000); // refresh every minute
+  })();
+
+  /* ==========================================================
+     LIVE SEATS COUNTER
+     ========================================================== */
+  (function() {
+    var section = document.getElementById('reservar');
+    if (!section) return;
+
+    var API_BASE = 'https://alma-sonora-bookings.connect-c36.workers.dev';
+    var eventId  = section.getAttribute('data-event-id');
+    if (!eventId) return;
+
+    var counter  = document.getElementById('seats-counter');
+    var textEl   = document.getElementById('seats-text');
+    var btn      = document.getElementById('reserva-btn');
+
+    function render(remaining, capacity) {
+      counter.classList.remove('loading', 'low', 'sold-out');
+      section.classList.remove('sold-out');
+
+      if (remaining <= 0) {
+        counter.classList.add('sold-out');
+        textEl.innerHTML = 'Esta ceremonia está <strong>completa</strong> — escríbenos para la próxima';
+        section.classList.add('sold-out');
+        btn.textContent = 'Lista de espera';
+        btn.href = 'https://wa.me/18097787500?text=Hola%2C+me+gustar%C3%ADa+entrar+a+la+lista+de+espera+para+la+pr%C3%B3xima+ceremonia';
+        return;
+      }
+
+      if (remaining <= 3) {
+        counter.classList.add('low');
+        textEl.innerHTML = 'Quedan <strong>' + remaining + ' ' + (remaining === 1 ? 'espacio' : 'espacios') + '</strong> de ' + capacity;
+        return;
+      }
+
+      textEl.innerHTML = '<strong>' + remaining + '</strong> de ' + capacity + ' espacios disponibles';
+    }
+
+    function fail() {
+      // Don't show "error" — just gracefully show the original messaging
+      counter.classList.remove('loading');
+      textEl.textContent = '12 espacios disponibles · cupo limitado';
+    }
+
+    fetch(API_BASE + '/api/events/' + eventId, { cache: 'no-store' })
+      .then(function(r) {
+        if (!r.ok) throw new Error('not ok');
+        return r.json();
+      })
+      .then(function(data) {
+        if (!data || !data.event) return fail();
+        var e = data.event;
+        var remaining = (typeof e.spots_remaining === 'number')
+          ? e.spots_remaining
+          : (e.capacity || 12);
+        render(Math.max(0, remaining), e.capacity || 12);
+      })
+      .catch(fail);
   })();
 </script>
 </body>
