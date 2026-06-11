@@ -138,6 +138,26 @@ footer a:hover{opacity:1}
 
 /* paper grain — tune via --grain */
 body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opacity:var(--grain,.05);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px}
+/* countdown + seats */
+.live-row{display:flex;flex-direction:column;align-items:center;gap:1.6rem;margin-top:2.6rem}
+.countdown{display:flex;align-items:baseline;gap:1.2rem}
+.cd-unit{text-align:center}
+.cd-val{font-family:'Italiana',serif;font-size:clamp(1.9rem,3.4vw,2.6rem);color:var(--espresso);line-height:1}
+.cd-lab{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--clay-deep);font-weight:600;margin-top:.4rem}
+.cd-sep{font-family:'Italiana',serif;font-size:1.8rem;color:var(--clay);align-self:flex-start}
+.seats{display:none;align-items:center;gap:.7rem;font-size:.95rem;color:var(--cocoa)}
+.seats.show{display:flex}
+.seats .dot{width:9px;height:9px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 3px rgba(161,123,95,.25);animation:pulse 2.4s ease-in-out infinite}
+.seats.low .dot{background:#b0522e;box-shadow:0 0 0 3px rgba(176,82,46,.25)}
+.seats strong{color:var(--espresso)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+/* testimonial video */
+.voice{background:var(--linen);padding:7rem 0;text-align:center}
+.voice .eyebrow{display:block;margin-bottom:2.2rem}
+.voice blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(1.35rem,2.3vw,1.7rem);color:var(--cocoa);max-width:34ch;margin:0 auto 2.4rem;line-height:1.5}
+.voice .vid-wrap{max-width:300px;margin:0 auto}
+.voice .arch video{cursor:pointer}
+.voice figcaption{margin-top:1rem;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay-deep);font-weight:600}
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in{opacity:1;transform:none}
@@ -152,7 +172,10 @@ body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opa
       <svg viewBox="-50 -50 100 100" aria-hidden="true"><use href="#lotus"/></svg>
       <span>Alma Sonora</span>
     </a>
-    <a class="btn" href="#reserve">Reserve</a>
+    <div style="display:flex;align-items:center;gap:1.4rem">
+      <button id="lang-toggle" style="background:none;border:none;cursor:pointer;font-family:'EB Garamond',serif;font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--cocoa)">ES</button>
+      <a class="btn" data-i18n="nav_reserve" href="#reserve">Reserve</a>
+    </div>
   </nav>
 </header>
 
@@ -219,15 +242,25 @@ body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opa
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow">Father's Day weekend · Miami</span>
+      <span class="eyebrow" data-i18n="hero_eyebrow">Father's Day weekend · Miami</span>
       <h1 class="display hero-title">El Descanso<br>del Padre</h1>
-      <p class="poetic hero-sub">An evening of deep sound for the men who carry so much.</p>
-      <p class="hero-date">Saturday, June 20 · 6:00 PM</p>
-      <a class="btn" href="#reserve">Reserve · Bring your father free</a>
+      <p class="poetic hero-sub" data-i18n="hero_sub">An evening of deep sound for the men who carry so much.</p>
+      <p class="hero-date" data-i18n="hero_date">Saturday, June 20 · 6:00 PM</p>
+      <a class="btn" data-i18n="hero_cta" href="#reserve">Reserve · Bring your father free</a>
+      <div class="live-row">
+        <div class="countdown" id="cd" aria-live="polite">
+          <div class="cd-unit"><div class="cd-val" id="cd-d">–</div><div class="cd-lab" data-i18n="cd_d">days</div></div>
+          <div class="cd-sep">·</div>
+          <div class="cd-unit"><div class="cd-val" id="cd-h">–</div><div class="cd-lab" data-i18n="cd_h">hours</div></div>
+          <div class="cd-sep">·</div>
+          <div class="cd-unit"><div class="cd-val" id="cd-m">–</div><div class="cd-lab" data-i18n="cd_m">min</div></div>
+        </div>
+        <div class="seats" id="seats"><span class="dot"></span><span id="seats-text"></span></div>
+      </div>
     </div>
     <figure class="hero-photo">
       <div class="arch"><video autoplay muted loop playsinline poster="descanso-poster.jpg" aria-label="The sun low over the ocean behind crystal bowls and roses on the sand"><source src="descanso-loop.mp4" type="video/mp4"></video></div>
-      <figcaption>An evening under the open sky</figcaption>
+      <figcaption data-i18n="hero_cap">An evening under the open sky</figcaption>
     </figure>
   </div>
 </section>
@@ -235,38 +268,38 @@ body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opa
 <section class="invite">
   <div class="wrap reveal">
     <svg class="lotus" viewBox="-58 -50 116 100" aria-hidden="true"><use href="#lotus"/></svg>
-    <span class="eyebrow">The invitation</span>
-    <h2 class="display">An hour where nothing is asked of him</h2>
-    <p>Fathers hold a lot. The job, the family, the quiet pressure of being the one others lean on. What they almost never get is an hour where nothing is asked of them.</p>
-    <p>This is that hour. No ceremony to learn, nothing to share, nothing to do. You lie down under the evening sky, and two gongs do the rest.</p>
+    <span class="eyebrow" data-i18n="inv_eyebrow">The invitation</span>
+    <h2 class="display" data-i18n="inv_h2">An hour where nothing is asked of him</h2>
+    <p data-i18n="inv_p1">Fathers hold a lot. The job, the family, the quiet pressure of being the one others lean on. What they almost never get is an hour where nothing is asked of them.</p>
+    <p data-i18n="inv_p2">This is that hour. No ceremony to learn, nothing to share, nothing to do. You lie down under the evening sky, and two gongs do the rest.</p>
     <div class="signature">
-      <p>"I'm a father. I know what we carry — and I know what an hour of deep rest does for a nervous system that never gets to stand down. We built this evening for us."</p>
-      <span class="name">Juan Saer · Co-facilitator</span>
+      <p data-i18n="sig_p">"I'm a father. I know what we carry — and I know what an hour of deep rest does for a nervous system that never gets to stand down. We built this evening for us."</p>
+      <span class="name" data-i18n="sig_name">Juan Saer · Co-facilitator</span>
     </div>
   </div>
 </section>
 
 <section class="evening">
   <div class="wrap">
-    <h2 class="display reveal">The evening</h2>
+    <h2 class="display reveal" data-i18n="ev_h2">The evening</h2>
     <div class="evening-grid">
     <div>
     <div class="ev-row reveal">
-      <div><h3>Arrival &amp; settling</h3><span class="dur">15 minutes</span></div>
-      <p>You're welcomed into the garden as the light goes low. Find your mat, lie down, arrive.</p>
+      <div><h3 data-i18n="ev1_h">Arrival &amp; settling</h3><span class="dur" data-i18n="ev1_d">15 minutes</span></div>
+      <p data-i18n="ev1_p">You're welcomed into the garden as the light goes low. Find your mat, lie down, arrive.</p>
     </div>
     <div class="ev-row reveal">
-      <div><h3>The sound journey</h3><span class="dur">60 minutes</span></div>
-      <p>Two large gongs, crystal and Tibetan bowls. Deep tones that move through the body and tell the nervous system: you can stand down now.</p>
+      <div><h3 data-i18n="ev2_h">The sound journey</h3><span class="dur" data-i18n="ev2_d">60 minutes</span></div>
+      <p data-i18n="ev2_p">Two large gongs, crystal and Tibetan bowls. Deep tones that move through the body and tell the nervous system: you can stand down now.</p>
     </div>
     <div class="ev-row reveal">
-      <div><h3>Return</h3><span class="dur">15 minutes</span></div>
-      <p>We come back slowly. A few minutes of quiet before the evening lets you go.</p>
+      <div><h3 data-i18n="ev3_h">Return</h3><span class="dur" data-i18n="ev3_d">15 minutes</span></div>
+      <p data-i18n="ev3_p">We come back slowly. A few minutes of quiet before the evening lets you go.</p>
     </div>
     </div>
     <figure class="evening-photo reveal">
       <div class="arch"><img src="evening-gong.jpg" alt="A gong silhouetted against the setting sun, with flowers and a frame drum on the sand"></div>
-      <figcaption>Golden hour</figcaption>
+      <figcaption data-i18n="ev_cap">Golden hour</figcaption>
     </figure>
     </div>
   </div>
@@ -274,34 +307,46 @@ body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opa
 
 <section class="offer">
   <div class="wrap reveal">
-    <span class="eyebrow">The offer</span>
-    <h2 class="display">One ticket, two seats</h2>
-    <p class="big">Pay for yours — your father, or the father in your life, comes free.</p>
-    <p>A gift that isn't another thing; it's an hour of nothing.</p>
+    <span class="eyebrow" data-i18n="of_eyebrow">The offer</span>
+    <h2 class="display" data-i18n="of_h2">One ticket, two seats</h2>
+    <p class="big" data-i18n="of_big">Pay for yours — your father, or the father in your life, comes free.</p>
+    <p data-i18n="of_p">A gift that isn't another thing; it's an hour of nothing.</p>
     <div class="price">$50 <small>USD</small></div>
-    <p class="price-note">Includes your seat + a father's seat · Mats and bolsters provided</p>
-    <a class="btn" href="#reserve">Reserve my seats</a>
+    <p class="price-note" data-i18n="of_note">Includes your seat + a father's seat · Mats and bolsters provided</p>
+    <a class="btn" data-i18n="of_cta" href="#reserve">Reserve my seats</a>
   </div>
 </section>
 
 <section class="details">
   <div class="wrap">
-    <h2 class="display reveal">Details</h2>
+    <h2 class="display reveal" data-i18n="dt_h2">Details</h2>
     <div class="det-grid reveal">
-      <div class="det-item"><span class="label">Date &amp; time</span><div class="value">Saturday, June 20</div><p>6:00 PM · approx. 90 minutes</p></div>
-      <div class="det-item"><span class="label">Place</span><div class="value">Outdoor garden venue</div><p>6820 N Waterway Dr, Miami, FL 33155</p></div>
-      <div class="det-item"><span class="label">Capacity</span><div class="value">20 people total</div><p>Just 10 reservations — each includes a father's seat · first come first served</p></div>
-      <div class="det-item"><span class="label">What to bring</span><div class="value">Just yourselves</div><p>Comfortable clothes, a light layer for the evening, and water. Mats and bolsters provided.</p></div>
+      <div class="det-item"><span class="label" data-i18n="dt1_l">Date &amp; time</span><div class="value" data-i18n="dt1_v">Saturday, June 20</div><p data-i18n="dt1_p">6:00 PM · approx. 90 minutes</p></div>
+      <div class="det-item"><span class="label" data-i18n="dt2_l">Place</span><div class="value" data-i18n="dt2_v">Outdoor garden venue</div><p>6820 N Waterway Dr, Miami, FL 33155</p></div>
+      <div class="det-item"><span class="label" data-i18n="dt3_l">Capacity</span><div class="value" data-i18n="dt3_v">20 people total</div><p data-i18n="dt3_p">Just 10 reservations — each includes a father's seat · first come first served</p></div>
+      <div class="det-item"><span class="label" data-i18n="dt4_l">What to bring</span><div class="value" data-i18n="dt4_v">Just yourselves</div><p data-i18n="dt4_p">Comfortable clothes, a light layer for the evening, and water. Mats and bolsters provided.</p></div>
     </div>
+  </div>
+</section>
+
+
+<section class="voice">
+  <div class="wrap reveal">
+    <span class="eyebrow" data-i18n="vc_eyebrow">After a session</span>
+    <blockquote data-i18n="vc_quote">"Si estás en una montaña y te está cayendo el agua — sientes que te está limpiando todo."</blockquote>
+    <figure class="vid-wrap">
+      <div class="arch"><video controls preload="none" playsinline poster="testimonio-poster.jpg" style="aspect-ratio:9/16"><source src="testimonio-adela.mp4" type="video/mp4"></video></div>
+      <figcaption>— Adela</figcaption>
+    </figure>
   </div>
 </section>
 
 <section class="reserve" id="reserve">
   <div class="wrap reveal">
-    <h2 class="display">Give him the rest he won't ask for</h2>
-    <p>Reservations are opening now. Write to us on WhatsApp and we'll hold your two seats while payment links go live.</p>
+    <h2 class="display" data-i18n="rs_h2">Give him the rest he won't ask for</h2>
+    <p data-i18n="rs_p">Reservations are opening now. Write to us on WhatsApp and we'll hold your two seats while payment links go live.</p>
     <!-- Swap href below for the Square payment link when generated; keep data-square-link -->
-    <a class="btn" data-square-link href="https://wa.me/18097787500?text=Hola%21%20Quiero%20reservar%20para%20El%20Descanso%20del%20Padre%20%28junio%2020%29">Reserve my seats</a>
+    <a class="btn" data-square-link href="https://wa.me/18097787500?text=Hola%21%20Quiero%20reservar%20para%20El%20Descanso%20del%20Padre%20%28junio%2020%29"data-i18n="rs_cta">Reserve my seats</a>
   </div>
 </section>
 
@@ -324,5 +369,99 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 </script>
 
+<script>
+const I18N = {
+ es: {
+  nav_reserve:"Reservar",
+  hero_eyebrow:"Fin de semana del Día del Padre · Miami",
+  hero_sub:"Una noche de sonido profundo para los hombres que cargan tanto.",
+  hero_date:"Sábado 20 de junio · 6:00 PM",
+  hero_cta:"Reservar · Tu padre entra gratis",
+  hero_cap:"Una noche bajo el cielo abierto",
+  inv_eyebrow:"La invitación",
+  inv_h2:"Una hora donde nadie le pide nada",
+  inv_p1:"Los padres cargan mucho. El trabajo, la familia, la presión silenciosa de ser el que sostiene a los demás. Lo que casi nunca reciben es una hora donde nadie les pide nada.",
+  inv_p2:"Esta es esa hora. No hay ceremonia que aprender, nada que compartir, nada que hacer. Te recuestas bajo el cielo de la tarde, y dos gongs hacen el resto.",
+  sig_p:"\u201CSoy padre. Sé lo que cargamos — y sé lo que una hora de descanso profundo le hace a un sistema nervioso que nunca puede bajar la guardia. Esta noche la creamos para nosotros.\u201D",
+  sig_name:"Juan Saer · Co-facilitador",
+  ev_h2:"La noche",
+  ev1_h:"Llegada", ev1_d:"15 minutos",
+  ev1_p:"Te recibimos en el jardín mientras baja la luz. Encuentra tu mat, recuéstate, llega.",
+  ev2_h:"El viaje sonoro", ev2_d:"60 minutos",
+  ev2_p:"Dos gongs grandes, cuencos de cuarzo y tibetanos. Tonos profundos que recorren el cuerpo y le dicen al sistema nervioso: ya puedes soltar.",
+  ev3_h:"Regreso", ev3_d:"15 minutos",
+  ev3_p:"Volvemos despacio. Unos minutos de silencio antes de que la noche te deje ir.",
+  ev_cap:"La hora dorada",
+  of_eyebrow:"La oferta",
+  of_h2:"Un boleto, dos lugares",
+  of_big:"Paga el tuyo — tu padre, o el padre de tu vida, entra gratis.",
+  of_p:"Un regalo que no es una cosa más; es una hora de nada.",
+  of_note:"Incluye tu lugar + el lugar de un padre · Mats y bolsters incluidos",
+  of_cta:"Reservar mis lugares",
+  dt_h2:"Detalles",
+  dt1_l:"Fecha y hora", dt1_v:"Sábado 20 de junio", dt1_p:"6:00 PM · aprox. 90 minutos",
+  dt2_l:"Lugar", dt2_v:"Jardín al aire libre",
+  dt3_l:"Cupo", dt3_v:"20 personas en total", dt3_p:"Solo 10 reservaciones — cada una incluye el lugar de un padre · por orden de llegada",
+  dt4_l:"Qué traer", dt4_v:"Solo ustedes", dt4_p:"Ropa cómoda, una capa ligera para la noche, y agua. Mats y bolsters incluidos.",
+  rs_h2:"Regálale el descanso que él no va a pedir",
+  rs_p:"Las reservaciones están abriendo. Escríbenos por WhatsApp y guardamos tus dos lugares mientras activamos los links de pago.",
+  rs_cta:"Reservar mis lugares",
+  cd_d:"días", cd_h:"horas", cd_m:"min",
+  vc_eyebrow:"Después de una sesión",
+  vc_quote:"\u201CSi estás en una montaña y te está cayendo el agua — sientes que te está limpiando todo.\u201D"
+ },
+ en: {}
+};
+(function(){
+  // snapshot EN defaults from the DOM
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ I18N.en[el.dataset.i18n] = el.innerHTML; });
+  const btn = document.getElementById('lang-toggle');
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const v = I18N[l][el.dataset.i18n];
+      if(v) el.innerHTML = v;
+    });
+    btn.textContent = l==='en' ? 'ES' : 'EN';
+    try{ localStorage.setItem('as_lang', l); }catch(e){}
+  }
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = 'en';
+  try{ lang = param || localStorage.getItem('as_lang') || 'en'; }catch(e){ lang = param || 'en'; }
+  if(lang==='es') setLang('es');
+  btn.addEventListener('click', ()=> setLang(document.documentElement.lang==='en'?'es':'en'));
+})();
+</script>
+<script>
+// countdown to event start
+(function(){
+  var T = new Date('2026-06-20T18:00:00-04:00').getTime();
+  var d=document.getElementById('cd-d'),hh=document.getElementById('cd-h'),m=document.getElementById('cd-m');
+  function tick(){
+    var diff = T - Date.now();
+    if(diff<=0){ document.getElementById('cd').style.display='none'; return; }
+    d.textContent = Math.floor(diff/864e5);
+    hh.textContent = Math.floor(diff%864e5/36e5);
+    m.textContent = Math.floor(diff%36e5/6e4);
+    setTimeout(tick, 30000);
+  }
+  tick();
+})();
+// live seats from Worker (hides itself if event row not yet in D1)
+(function(){
+  var API='https://alma-sonora-bookings.connect-c36.workers.dev';
+  fetch(API+'/api/events/descanso-del-padre-2026-06-20',{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(e){
+      var cap=e.capacity||10, rem=Math.max(0,(typeof e.remaining==='number')?e.remaining:cap-(e.seats_taken||0));
+      var es=(document.documentElement.lang==='es');
+      var el=document.getElementById('seats'),tx=document.getElementById('seats-text');
+      if(rem<=0){ tx.innerHTML= es?'<strong>Agotado</strong> — escríbenos para lista de espera':'<strong>Sold out</strong> — write us for the waitlist'; }
+      else { tx.innerHTML= es?('Quedan <strong>'+rem+'</strong> de '+cap+' reservaciones'):('<strong>'+rem+'</strong> of '+cap+' reservations left'); }
+      if(rem>0&&rem<=3) el.classList.add('low');
+      el.classList.add('show');
+    }).catch(function(){});
+})();
+</script>
 </body>
 </html>
