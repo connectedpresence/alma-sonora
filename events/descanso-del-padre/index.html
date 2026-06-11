@@ -30,7 +30,7 @@
   "endDate": "2026-06-20T19:30:00-04:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "location": {"@type": "Place", "name": "Outdoor garden venue (address upon confirmation)", "address": {"@type": "PostalAddress", "addressLocality": "Miami", "addressRegion": "FL", "addressCountry": "US"}},
+  "location": {"@type": "Place", "name": "Outdoor garden venue", "address": {"@type": "PostalAddress", "streetAddress": "6820 N Waterway Dr", "addressLocality": "Miami", "addressRegion": "FL", "postalCode": "33155", "addressCountry": "US"}},
   "image": "https://alma-sonora.com/events/descanso-del-padre/og-descanso.jpg",
   "organizer": {"@type": "Organization", "name": "Alma Sonora", "url": "https://alma-sonora.com"},
   "offers": {"@type": "Offer", "price": "65", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://alma-sonora.com/events/descanso-del-padre/"},
@@ -103,6 +103,10 @@ header{position:absolute;top:0;left:0;right:0;z-index:10}
 .ev-row p{color:var(--cocoa);align-self:center}
 @media(max-width:700px){.ev-row{grid-template-columns:1fr;gap:.5rem}}
 
+.evening-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:center}
+.evening-photo .arch{aspect-ratio:1/1.25;box-shadow:0 0 0 1px var(--clay-deep), 0 22px 44px rgba(74,56,44,.14)}
+.evening-photo figcaption{margin-top:1rem;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay-deep);font-weight:600;text-align:center}
+@media(max-width:860px){.evening-grid{grid-template-columns:1fr;gap:3rem}.evening-photo{max-width:340px;margin:0 auto}}
 .offer{background:var(--sand-light);padding:8rem 0;text-align:center}
 .offer .eyebrow{display:block;margin-bottom:1.4rem}
 .offer h2{font-size:clamp(2.2rem,4vw,3.2rem);margin-bottom:1.8rem}
@@ -174,7 +178,7 @@ footer a:hover{opacity:1}
       <a class="btn" href="#reserve">Reserve · Bring your father free</a>
     </div>
     <figure class="hero-photo">
-      <div class="arch"><img src="hero-descanso.jpg" alt="Crystal bowls, roses, and a drum on the sand as the sun sets over the ocean"></div>
+      <div class="arch"><video autoplay muted loop playsinline poster="descanso-poster.jpg" aria-label="Sunset over the ocean behind crystal bowls and roses on the sand"><source src="descanso-loop.mp4" type="video/mp4"></video></div>
       <figcaption>An evening under the open sky</figcaption>
     </figure>
   </div>
@@ -197,6 +201,8 @@ footer a:hover{opacity:1}
 <section class="evening">
   <div class="wrap">
     <h2 class="display reveal">The evening</h2>
+    <div class="evening-grid">
+    <div>
     <div class="ev-row reveal">
       <div><h3>Arrival &amp; settling</h3><span class="dur">15 minutes</span></div>
       <p>You're welcomed into the garden as the light goes low. Find your mat, lie down, arrive.</p>
@@ -208,6 +214,12 @@ footer a:hover{opacity:1}
     <div class="ev-row reveal">
       <div><h3>Return</h3><span class="dur">15 minutes</span></div>
       <p>We come back slowly. A few minutes of quiet before the evening lets you go.</p>
+    </div>
+    </div>
+    <figure class="evening-photo reveal">
+      <div class="arch"><img src="evening-gong.jpg" alt="A gong silhouetted against the setting sun, with flowers and a frame drum on the sand"></div>
+      <figcaption>The gongs at golden hour</figcaption>
+    </figure>
     </div>
   </div>
 </section>
@@ -229,7 +241,7 @@ footer a:hover{opacity:1}
     <h2 class="display reveal">Details</h2>
     <div class="det-grid reveal">
       <div class="det-item"><span class="label">Date &amp; time</span><div class="value">Saturday, June 20</div><p>6:00 PM · approx. 90 minutes</p></div>
-      <div class="det-item"><span class="label">Place</span><div class="value">Outdoor garden venue</div><p>Miami · exact address upon confirming your reservation</p></div>
+      <div class="det-item"><span class="label">Place</span><div class="value">Outdoor garden venue</div><p>6820 N Waterway Dr, Miami, FL 33155</p></div>
       <div class="det-item"><span class="label">Capacity</span><div class="value">20 reservations</div><p>Each with a free father's seat · intimate group, first come first served</p></div>
       <div class="det-item"><span class="label">What to bring</span><div class="value">Just yourselves</div><p>Comfortable clothes, a light layer for the evening, and water. Mats and bolsters provided.</p></div>
     </div>
@@ -259,6 +271,9 @@ footer a:hover{opacity:1}
 <script>
 const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.18});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('video').forEach(v=>{v.removeAttribute('autoplay');v.pause();});
+}
 </script>
 
 </body>
