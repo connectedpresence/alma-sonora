@@ -1,29 +1,58 @@
 {
   "events": [
     {
-      "id": "cacao-sonido-2026-05-24",
+      "slug": "descanso-del-padre",
+      "title": "El Descanso del Padre",
+      "subtitle": "An evening of deep sound for fathers",
+      "status": "open",
+      "date": "2026-06-20",
+      "date_display": "Saturday, June 20",
+      "time_display": "6:00 PM",
+      "venue": "Outdoor garden venue",
+      "address": "6820 N Waterway Dr, Miami, FL 33155",
+      "city": "Miami",
+      "price_display": "$65",
+      "price_note": "Includes your seat + a father's seat",
+      "blurb": "Two large gongs under the evening sky. Pay for your seat — your father, or the father in your life, comes free.",
+      "url": "/events/descanso-del-padre/",
+      "image": "/events/descanso-del-padre/og-descanso.jpg",
+      "square_checkout_url": null
+    },
+    {
+      "slug": "puttshack-brickell",
+      "title": "Alma Sonora at Puttshack",
+      "subtitle": "Brickell City Centre",
+      "status": "announcing",
+      "date": null,
+      "date_display": "July 2026",
+      "time_display": null,
+      "venue": "Puttshack",
+      "address": "Brickell City Centre, Miami, FL",
+      "city": "Miami",
+      "price_display": null,
+      "price_note": null,
+      "blurb": "Sound therapy arrives in the heart of Brickell. Date and details coming soon — write to us to hear first.",
+      "url": "https://wa.me/18097787500?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20del%20evento%20en%20Puttshack%20Brickell",
+      "image": null,
+      "square_checkout_url": null
+    },
+    {
+      "slug": "mayo-24",
       "title": "Cacao & Sonido",
       "subtitle": "Una mañana ceremonial",
+      "status": "past",
       "date": "2026-05-24",
       "date_display": "Domingo 24 de Mayo, 2026",
-      "time": "10:00",
       "time_display": "10:00 AM",
-      "duration_minutes": 120,
-      "location": "Espacio Alma Sonora",
+      "venue": "Espacio Alma Sonora",
       "address": "Bird Road, Miami, FL",
-      "capacity": 12,
-      "price_cents": 6500,
+      "city": "Miami",
       "price_display": "$65",
-      "currency": "USD",
-      "description": "Una mañana para regular tu sistema nervioso y recordar cómo descansar. Cacao ceremonial, sonoterapia con cuencos de cuarzo y presencia compartida.",
-      "includes": [
-        "Cacao ceremonial",
-        "Sonoterapia con cuencos de cuarzo",
-        "Espacio de integración",
-        "Cupo limitado a 12 personas"
-      ],
-      "square_checkout_url": null,
-      "active": true
+      "price_note": null,
+      "blurb": "Cacao ceremonial, sonoterapia con cuencos de cuarzo y presencia compartida en grupo íntimo.",
+      "url": "/events/mayo-24/",
+      "image": null,
+      "square_checkout_url": "https://square.link/u/6kQsK95V"
     }
   ]
 }

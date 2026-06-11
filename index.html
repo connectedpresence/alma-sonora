@@ -370,7 +370,7 @@ footer{
     <ul class="nav-links">
       <li><a href="#offerings">Offerings</a></li>
       <li><a href="#who">Who we are</a></li>
-      <li><a href="#events">Events</a></li>
+      <li><a href="/events/">Events</a></li>
       <li class="keep"><a class="btn" href="/events/descanso-del-padre/#reserve">Reserve</a></li>
     </ul>
   </nav>
@@ -397,7 +397,7 @@ footer{
       <span class="eyebrow">Sound therapy &amp; ceremony · Miami</span>
       <h1 class="display hero-title">Sound,<br>ceremony,<br><em>presence.</em></h1>
       <p class="poetic hero-sub">Frequency that brings body and mind back to balance.</p>
-      <a class="btn" href="/events/descanso-del-padre/">Next ceremony · June 20</a>
+      <a class="btn" id="hero-event-cta" href="/events/descanso-del-padre/">Next ceremony · June 20</a>
     </div>
     <figure class="hero-photo">
       <div class="arch"><video autoplay muted loop playsinline poster="hero-poster.jpg" aria-label="Sunrise over the ocean behind crystal bowls, flowers, and a gong at a beach ceremony"><source src="hero-loop.mp4" type="video/mp4"></video></div>
@@ -487,11 +487,12 @@ footer{
 
 <section class="events" id="events">
   <div class="wrap events-grid reveal">
-    <div>
+    <div id="next-event">
       <span class="eyebrow">Upcoming ceremonies</span>
-      <h2 class="display">El Descanso del Padre</h2>
-      <p>An evening of deep sound for the men who carry so much. Saturday, June 20 · 6:00 PM · Miami. Pay for your seat — your father comes free.</p>
-      <a class="btn" href="/events/descanso-del-padre/">See the event &amp; reserve</a>
+      <h2 class="display" id="ne-title">El Descanso del Padre</h2>
+      <p id="ne-blurb">An evening of deep sound for the men who carry so much. Saturday, June 20 · 6:00 PM · Miami. Pay for your seat — your father comes free.</p>
+      <a class="btn" id="ne-cta" href="/events/descanso-del-padre/">See the event &amp; reserve</a>
+      <p style="margin-top:1.6rem"><a href="/events/" style="font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--cocoa)">All ceremonies →</a></p>
     </div>
     <figure class="events-photo">
       <div class="arch"><img src="home-studio.jpg" alt="Espacio Alma Sonora prepared for a session — mats, cushions, and bowls in warm light"></div>
@@ -532,5 +533,18 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 </script>
 
+<script>
+fetch('/events.json').then(r=>r.json()).then(d=>{
+  const up=(d.events||[]).filter(e=>e.status==='open'||e.status==='sold_out')
+    .sort((a,b)=>(a.date||'9999')<(b.date||'9999')?-1:1);
+  const e=up[0]; if(!e) return;
+  const t=document.getElementById('ne-title'), b=document.getElementById('ne-blurb'),
+        c=document.getElementById('ne-cta'), h=document.getElementById('hero-event-cta');
+  if(t) t.textContent=e.title;
+  if(b) b.textContent=(e.blurb||'')+' '+[e.date_display,e.time_display,e.city].filter(Boolean).join(' · ')+'.';
+  if(c){c.href=e.url; c.textContent=e.status==='sold_out'?'Join the waitlist':'See the event & reserve';}
+  if(h&&e.date_display){h.href=e.url; h.textContent='Next ceremony · '+e.date_display.replace(/^[A-Za-z]+, /,'');}
+}).catch(()=>{});
+</script>
 </body>
 </html>
