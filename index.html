@@ -353,6 +353,14 @@ footer{
 .events-photo figcaption{margin-top:1rem;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cocoa);font-weight:600}
 @media(max-width:860px){.events-grid{grid-template-columns:1fr;gap:3rem;text-align:center}.events-grid p{margin-left:auto;margin-right:auto}.events-photo{max-width:340px;margin:0 auto}}
 
+/* paper grain — tune via --grain */
+body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opacity:var(--grain,.05);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px}
+/* full-bleed experience break */
+.bleed{position:relative;height:74vh;min-height:430px;overflow:hidden}
+.bleed img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bleed .veil{position:absolute;inset:0;background:linear-gradient(rgba(74,56,44,.22),rgba(74,56,44,.42))}
+.bleed .line{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 8vw}
+.bleed .line p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;color:var(--linen);font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.45;max-width:28ch;text-shadow:0 2px 18px rgba(74,56,44,.55)}
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in{opacity:1;transform:none}
@@ -439,8 +447,8 @@ footer{
 
     <div class="moments">
       <figure class="reveal">
-        <div class="arch"><img src="home-cacao.jpg" alt="Ceremonial cacao poured into cupped hands during an outdoor ceremony"></div>
-        <figcaption>Ceremonial cacao</figcaption>
+        <div class="arch"><img src="home-cacao.jpg" alt="Essential oil poured into cupped hands during an outdoor ceremony"></div>
+        <figcaption>Aromatherapy</figcaption>
       </figure>
       <figure class="reveal">
         <div class="arch"><img src="home-bowl.jpg" alt="Karina playing a singing bowl over a guest at rest in the park" style="object-position:50% 30%"></div>
@@ -484,6 +492,24 @@ footer{
     </figure>
   </div>
 </section>
+
+<section class="bleed" aria-label="A ceremony on Miami Beach">
+  <img src="experience-bleed.jpg" alt="Two gongs and an altar of bowls and flowers on the sand, with guests resting behind">
+  <div class="veil"></div>
+  <div class="line"><p>Deep tones that move through the body and tell the nervous system: you can stand down now.</p></div>
+</section>
+
+<!-- TESTIMONIALS — hidden until real quotes arrive. Uncomment and fill verbatim quotes + first names.
+<section class="voices" style="background:var(--linen);padding:7rem 0;text-align:center">
+  <div class="wrap">
+    <span class="eyebrow" style="display:block;margin-bottom:2.5rem">What people say</span>
+    <blockquote class="poetic" style="font-size:clamp(1.4rem,2.4vw,1.8rem);max-width:34ch;margin:0 auto 1rem">"QUOTE_ONE"</blockquote>
+    <p class="eyebrow" style="margin-bottom:3.5rem">— FIRST_NAME</p>
+    <blockquote class="poetic" style="font-size:clamp(1.4rem,2.4vw,1.8rem);max-width:34ch;margin:0 auto 1rem">"QUOTE_TWO"</blockquote>
+    <p class="eyebrow">— FIRST_NAME</p>
+  </div>
+</section>
+-->
 
 <section class="events" id="events">
   <div class="wrap events-grid reveal">

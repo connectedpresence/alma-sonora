@@ -33,8 +33,8 @@
   "location": {"@type": "Place", "name": "Outdoor garden venue", "address": {"@type": "PostalAddress", "streetAddress": "6820 N Waterway Dr", "addressLocality": "Miami", "addressRegion": "FL", "postalCode": "33155", "addressCountry": "US"}},
   "image": "https://alma-sonora.com/events/descanso-del-padre/og-descanso.jpg",
   "organizer": {"@type": "Organization", "name": "Alma Sonora", "url": "https://alma-sonora.com"},
-  "offers": {"@type": "Offer", "price": "65", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://alma-sonora.com/events/descanso-del-padre/"},
-  "maximumAttendeeCapacity": 40
+  "offers": {"@type": "Offer", "price": "50", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://alma-sonora.com/events/descanso-del-padre/"},
+  "maximumAttendeeCapacity": 20
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,6 +136,8 @@ footer a:hover{opacity:1}
 .foot-links{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:2.5rem;font-size:.95rem;letter-spacing:.06em}
 .foot-base{border-top:1px solid rgba(245,237,224,.18);padding-top:2rem;font-size:.85rem;opacity:.7;letter-spacing:.06em}
 
+/* paper grain — tune via --grain */
+body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opacity:var(--grain,.05);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px}
 @media (prefers-reduced-motion:no-preference){
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in{opacity:1;transform:none}
@@ -178,7 +180,7 @@ footer a:hover{opacity:1}
       <a class="btn" href="#reserve">Reserve · Bring your father free</a>
     </div>
     <figure class="hero-photo">
-      <div class="arch"><video autoplay muted loop playsinline poster="descanso-poster.jpg" aria-label="Sunset over the ocean behind crystal bowls and roses on the sand"><source src="descanso-loop.mp4" type="video/mp4"></video></div>
+      <div class="arch"><video autoplay muted loop playsinline poster="descanso-poster.jpg" aria-label="The sun low over the ocean behind crystal bowls and roses on the sand"><source src="descanso-loop.mp4" type="video/mp4"></video></div>
       <figcaption>An evening under the open sky</figcaption>
     </figure>
   </div>
@@ -218,7 +220,7 @@ footer a:hover{opacity:1}
     </div>
     <figure class="evening-photo reveal">
       <div class="arch"><img src="evening-gong.jpg" alt="A gong silhouetted against the setting sun, with flowers and a frame drum on the sand"></div>
-      <figcaption>The gongs at golden hour</figcaption>
+      <figcaption>Golden hour</figcaption>
     </figure>
     </div>
   </div>
@@ -242,7 +244,7 @@ footer a:hover{opacity:1}
     <div class="det-grid reveal">
       <div class="det-item"><span class="label">Date &amp; time</span><div class="value">Saturday, June 20</div><p>6:00 PM · approx. 90 minutes</p></div>
       <div class="det-item"><span class="label">Place</span><div class="value">Outdoor garden venue</div><p>6820 N Waterway Dr, Miami, FL 33155</p></div>
-      <div class="det-item"><span class="label">Capacity</span><div class="value">20 reservations</div><p>Each with a free father's seat · intimate group, first come first served</p></div>
+      <div class="det-item"><span class="label">Capacity</span><div class="value">20 people total</div><p>Just 10 reservations — each includes a father's seat · first come first served</p></div>
       <div class="det-item"><span class="label">What to bring</span><div class="value">Just yourselves</div><p>Comfortable clothes, a light layer for the evening, and water. Mats and bolsters provided.</p></div>
     </div>
   </div>
