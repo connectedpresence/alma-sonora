@@ -19,23 +19,23 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --green-light:  #5d7a68;
-    --green-mid:    #46604f;
-    --green-deep:   #36513f;
-    --green-darker: #213829;
-    --green-shadow: #0d1611;
+    --green-light:  #8a6a52;
+    --green-mid:    #705040;
+    --green-deep:   #5d4334;
+    --green-darker: #4a382c;
+    --green-shadow: #2e231c;
 
-    --gold:         #c9a961;
-    --gold-bright:  #e0c074;
-    --gold-rich:    #d4b876;
-    --gold-deep:    #a08851;
-    --gold-darker:  #8a6e2a;
+    --gold:         #d8b98a;
+    --gold-bright:  #e8d0a8;
+    --gold-rich:    #e0c8a0;
+    --gold-deep:    #b08d63;
+    --gold-darker:  #8a6a45;
 
     --cream:        #faf2e0;
     --cream-warm:   #f5ede0;
     --cream-paper:  #f0e3c5;
-    --text-dark:    #1f2e26;
-    --text-mid:     #4a5a50;
+    --text-dark:    #4a382c;
+    --text-mid:     #705040;
   }
 
   html { scroll-behavior: smooth; }
@@ -693,13 +693,14 @@
     .seal { width: 76px; height: 76px; }
     .seal svg { width: 32px; height: 32px; }
   }
+body::after{content:"";position:fixed;inset:0;z-index:99;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px}
 </style>
 </head>
 
 <body>
 
   <header class="site-header">
-    <a href="/"><img src="logo.png" class="header-logo" alt="Alma Sonora"></a>
+    <a href="/"><img src="flor-mark.png" class="header-logo" alt="Alma Sonora"></a>
   </header>
 
   <main class="gracias-hero">
@@ -733,7 +734,7 @@
         <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Evento</p>
-          <p class="detail-value">Cacao &amp; Sonido<span class="sub">Una mañana ceremonial · Alma Sonora</span></p>
+          <p class="detail-value">El Descanso del Padre<span class="sub">Una noche de sonido profundo · Alma Sonora</span></p>
         </div>
       </div>
 
@@ -741,7 +742,7 @@
         <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Fecha &amp; hora</p>
-          <p class="detail-value">Domingo 24 de Mayo<span class="sub">10:00 AM · 2 horas aprox.</span></p>
+          <p class="detail-value">Sábado 20 de Junio<span class="sub">6:00 PM · 90 min aprox.</span></p>
         </div>
       </div>
 
@@ -749,7 +750,7 @@
         <span class="glyph">◆</span>
         <div>
           <p class="detail-label">Lugar</p>
-          <p class="detail-value">Espacio Alma Sonora<span class="sub">Bird Road, Miami · Dirección exacta 48 horas antes</span></p>
+          <p class="detail-value">Jardín al aire libre<span class="sub">6820 N Waterway Dr, Miami, FL 33155</span></p>
         </div>
       </div>
 
@@ -874,7 +875,7 @@
   </main>
 
   <footer>
-    <img src="logo.png" class="footer-logo" alt="Alma Sonora">
+    <img src="flor-mark.png" class="footer-logo" alt="Alma Sonora">
     <div class="footer-name">Alma Sonora</div>
     <p class="footer-copy">© 2026 Alma Sonora · Miami, FL</p>
   </footer>
